@@ -2,7 +2,7 @@ Resources:
   UsersDB:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: ${provider.stage}-lagingapain-users
+      TableName: ${self:provider.stage}-lagingapain-users
       AttributeDefinitions:
         - AttributeName: id
           AttributeType: S
