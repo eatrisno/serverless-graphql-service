@@ -2,7 +2,15 @@ export default `
 type User {
     id: String
     email: String
+    username: String
     token: String
+}
+
+input RegisterUserInput {
+    email: String!
+    username: String!
+    password: String!
+    confirmPassword: String!
 }
 
 type Query {
@@ -10,6 +18,7 @@ type Query {
 }
 
 type Mutation {
-    CreateUser(email: String!, password: String!): User!
+    RegisterUser(user: RegisterUserInput!): User!
+    LoginUser(email: String!, password: String!): User!
 }
 `;
