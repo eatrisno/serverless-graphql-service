@@ -22,6 +22,7 @@ provider:
   region: us-east-1
   lambdaHashingVersion: 20201221
   stage: dev
+  logRetentionInDays: 14
   environment:
     BookingsDB: ${self:custom.BookingsDB}
     ListingsDB: ${self:custom.ListingsDB}
@@ -47,6 +48,9 @@ provider:
 
 functions:
   graphql:
+    description: Graphql Service
+    memorySize: 128
+    timeout: 10
     handler: src/graphql.handler
     environment:
       SLS_DEBUG: true
@@ -55,12 +59,10 @@ functions:
           path: /graphql
           method: post
           cors: true
-          integration: lambda-proxy
       - http:
           path: /graphql
           method: get
           cors: true
-          integration: lambda-proxy
 
 plugins:
   - serverless-bundle

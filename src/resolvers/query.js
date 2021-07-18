@@ -3,6 +3,9 @@ export const hello = (args, context) => {
   return "Your GraphQL API is now LIVE!🎈 ";
 };
 
+export const ip = (args, context) => {
+  return context.headers['X-Forwarded-For']
+}
 export const getAllListings = async (args, context) => {
   const params = {
     TableName: process.env.ListingsDB || "dev-lunar-listings",

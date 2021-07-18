@@ -64,10 +64,10 @@ type ListingType {
 A hello world Query
 """
 type Query {
-     hello: String!
-     getAllListings: [Listing]
-     getAListing(listingId: String!): Listing!
-
+    ip: String
+    hello: String!
+    getAllListings: [Listing]
+    getAListing(listingId: String!): Listing!
 }
 
 
