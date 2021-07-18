@@ -4,7 +4,7 @@ export const GetUserByEmail = async (args, context, name) => {
     try{
         const params = {
             TableName: "dev-lagingapain-users",
-            FilterExpression: "email = :email",
+            ConditionExpression: "email = :email",
             ExpressionAttributeValues: {
                 ":email": args.email,
             },
@@ -23,6 +23,6 @@ export const GetUserByEmail = async (args, context, name) => {
         }
     }
     catch(e){
-        console.log('error',e,name)
+        console.log('error',name,e)
     }
 };

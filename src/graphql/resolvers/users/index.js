@@ -6,6 +6,6 @@ export default {
         GetUserByEmail: async (root, args, context) => GetUserByEmail(args, context, 'QueryUsers')
     },
     Mutation: {
-        CreateUser: async (root,args,context) => CreateUser(args, context, 'MutationCreateUsers')
+        CreateUser: async (root,args,context) => CreateUser(args, context, 'MutationCreateUser')
     }
 }

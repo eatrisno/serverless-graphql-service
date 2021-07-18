@@ -8,13 +8,25 @@ Resources:
           AttributeType: S
         - AttributeName: email
           AttributeType: S
-
+        - AttributeName: status
+          AttributeType: S
       KeySchema:
         - AttributeName: id
           KeyType: HASH
-        - AttributeName: email
+        - AttributeName: status
           KeyType: RANGE
-      # Set the capacity based on the stage
       ProvisionedThroughput:
         ReadCapacityUnits: ${self:custom.tableThroughput}
         WriteCapacityUnits: ${self:custom.tableThroughput}
+      GlobalSecondaryIndexes:
+       - IndexName: UserDetail
+         KeySchema:
+           - AttributeName: email
+             KeyType: HASH
+           - AttributeName: status
+             KeyType: RANGE
+         Projection:
+           ProjectionType: ALL
+         ProvisionedThroughput:
+           ReadCapacityUnits: ${self:custom.tableThroughput}
+           WriteCapacityUnits: ${self:custom.tableThroughput}
