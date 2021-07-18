@@ -1,18 +1,18 @@
 Resources:
-  BookingsDB:
+  UsersDB:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: ${self:custom.BookingsDB}
+      TableName: ${provider.stage}-lagingapain-users
       AttributeDefinitions:
-        - AttributeName: bookingId
+        - AttributeName: id
           AttributeType: S
-        - AttributeName: listingId
+        - AttributeName: email
           AttributeType: S
 
       KeySchema:
-        - AttributeName: bookingId
+        - AttributeName: id
           KeyType: HASH
-        - AttributeName: listingId
+        - AttributeName: email
           KeyType: RANGE
       # Set the capacity based on the stage
       ProvisionedThroughput:

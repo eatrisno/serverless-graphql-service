@@ -7,8 +7,6 @@ variablesResolutionMode: 20210326
 custom:
   stage: ${opt:stage, self:provider.stage}
   region: ${opt:region, self:provider.region}
-  ListingsDB: ${self:custom.stage}-lunar-listings
-  BookingsDB: ${self:custom.stage}-lunar-bookings
   tableThroughputs:
     prod: 1
     default: 1
@@ -23,9 +21,6 @@ provider:
   lambdaHashingVersion: 20201221
   stage: dev
   logRetentionInDays: 14
-  environment:
-    BookingsDB: ${self:custom.BookingsDB}
-    ListingsDB: ${self:custom.ListingsDB}
   iam:
     role:
       statements:
@@ -42,16 +37,14 @@ provider:
             - dynamodb:GetShardIterator
             - dynamodb:DescribeStream
             - dynamodb:ListStream
-          Resource:
-            - "Fn::GetAtt": [ListingsDB, Arn]
-            - "Fn::GetAtt": [BookingsDB, Arn]
+          Resource: arn:aws:dynamodb:us-east-1:*:*
 
 functions:
   graphql:
     description: Graphql Service
     memorySize: 128
     timeout: 10
-    handler: src/graphql.handler
+    handler: src/handler.graphql
     environment:
       SLS_DEBUG: true
     events:
@@ -70,5 +63,4 @@ plugins:
   - serverless-dotenv-plugin
 
 resources:
-  - ${file(resources/listing-db.yml)}
-  - ${file(resources/booking-db.yml)}
+  - ${file(resources/user-db.yml)}

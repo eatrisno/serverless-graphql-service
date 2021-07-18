@@ -1,12 +1,11 @@
-import { ApolloServer, gql } from "apollo-server-lambda";
+import { ApolloServer } from "apollo-server-lambda";
 
-import {schema} from "./schema";
-import {resolvers} from "./resolvers";
-
+import typeDefs from "./graphql/types";
+import resolvers from "./graphql/resolvers";
 
 const server = new ApolloServer({
-  typeDefs: schema,
-  resolvers: resolvers,
+  typeDefs,
+  resolvers,
   formatError: error => {
   return error;
 },
@@ -23,7 +22,7 @@ tracing: true,
 playground: true
 });
 
-exports.handler = (event, context, callback) => {
+exports.graphql = (event, context, callback) => {
   const handler = server.createHandler({
       cors: {
           origin: "*",
