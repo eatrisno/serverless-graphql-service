@@ -1,6 +1,38 @@
 import { v1 as uuidv1 } from "uuid";
 import stripePackage from "stripe";
+import { jwt } from 'jsonwebtoken';
 import dynamodb from "../../resources/libs/dynamodb-lib";
+
+const getToken = ({ id, username, email }) => 
+  jwt.sign(
+    {
+      id,
+      username,
+      email
+    },
+    'SECRET',
+    { expiresIn: '1d' }
+);
+
+export const loginUser = async (args, context) => {
+  let id = "1"
+  let user = {
+    id: 1,
+    username: 'eko',
+    email: 'eko@email.com',
+  }
+  console.log(user,'asd')
+  console.log(jwt.sign({id},'SECRET',{ expiresIn: '1d' }),'asd1')
+  const token = getToken(user); 
+  console.log(token);
+
+  return {
+    id: user.id,
+    username: user.username,
+    token
+  };
+
+}
 
 export const makeABooking = async (args, context) => {
   //Get the listing that the user selected

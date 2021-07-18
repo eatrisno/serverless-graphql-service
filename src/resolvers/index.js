@@ -1,5 +1,5 @@
 import { hello, getAllListings, getAListing, ip} from "./query";
-import { makeABooking } from "./mutation";
+import { makeABooking, loginUser } from "./mutation";
 
 export const resolvers = {
   Query: {
@@ -9,6 +9,7 @@ export const resolvers = {
     getAListing: (root, args, context) => getAListing(args, context),
   },
   Mutation: {
+    loginUser: (root, args, context) => loginUser(args, context),
     makeABooking: (root, args, context) => makeABooking(args, context),
   },
 };
