@@ -1,10 +1,10 @@
-import * as dataSources from "../../dataSources/users";
+import {get_user_by_email} from "../../dataSources/users";
 import {getAuth} from "./helper";
 
 
 export const GetUserByEmail = async (args, context, name) => {
     const user = await getAuth(auth);
-    const result = await dataSources.get_user_by_email(args.email)
+    const result = await get_user_by_email(args.email)
     if(result.length === 0){
         return {};
     }
